@@ -1,5 +1,6 @@
 <?php
 
+use App\Admin\Controllers\CountryController;
 use Illuminate\Routing\Router;
 
 Admin::routes();
@@ -96,6 +97,9 @@ Route::group([
 
     //配置客服电话
     $router->resource('/service_phones', 'ServicePhoneController');
+
+    //国家管理
+    $router->resource('/countries', 'CountryController');
 
 
 

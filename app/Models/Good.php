@@ -93,6 +93,10 @@ class Good extends Model
         return $this->belongsTo(Product::class)->withDefault();
     }
 
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
+
     /**
      * 列表数据
      * @param $request

@@ -89,6 +89,10 @@ class GoodOrder extends Model
         return $this->belongsTo(CouponCode::class);
     }
 
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
+
     /**
      * 列表数据
      * @param $request
@@ -98,7 +102,7 @@ class GoodOrder extends Model
 
         $filter_keywords = $request->get('filter_keywords');
 
-        $base_query =  GoodOrder::with(['order_skus','admin_user', 'coupon_code', 'audit_logs' => function($query){
+        $base_query =  GoodOrder::with(['country','order_skus','admin_user', 'coupon_code', 'audit_logs' => function($query){
             $query->orderBy('created_at', 'desc');
         }])->filterKeywords($filter_keywords);
 
@@ -261,7 +265,7 @@ class GoodOrder extends Model
 
         $filter_keywords = $request->get('filter_keywords');
 
-        $base_query =  GoodOrder::with(['order_skus'])->filterKeywords($filter_keywords);
+        $base_query =  GoodOrder::with(['order_skus','country'])->filterKeywords($filter_keywords);
 
         list($query, $search) = $this->query_conditions($base_query, $request);
 
@@ -289,13 +293,10 @@ class GoodOrder extends Model
         $pay_types = config('order.pay_types');
         $status = config('order.status');
 
-        $country_list = config('country.country_list');
-
         foreach ($orders as $order){
             $order->status_name = array_get($status, $order->status, '');
-            $country = Arr::get($country_list, $order->country_id);
-            $order->currency_code = $country['money_sign'];
-            $order->country_name = $country['name'];
+            $order->currency_code = $order->country->money_sign;
+            $order->country_name = $order->country->name;
         }
 
 //        dd($orders->toArray());

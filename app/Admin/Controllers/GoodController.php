@@ -17,6 +17,7 @@ use App\Models\GoodImage;
 use App\Models\GoodModule;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use Excel;
 use Illuminate\Support\Facades\Route;
 use Storage;
@@ -36,7 +37,7 @@ class GoodController extends BaseController
         $gd = new Good();
         list($goods, $search) = $gd->get_data($request);
 
-        $country_list = config('country.country_list');
+        $country_list = Country::pluck('name','id');
 
         //生成排序链接
         $sort_links = $this->build_sort_links($request);
@@ -47,7 +48,7 @@ class GoodController extends BaseController
     //新增页面
     public function create(Request $request){
 
-        $country_list = config('country.country_list');
+        $country_list = Country::pluck('name','id');
 
         return view('admin.good.create', compact('country_list'));
     }

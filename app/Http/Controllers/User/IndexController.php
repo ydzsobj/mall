@@ -10,6 +10,7 @@ use App\Models\Slide;
 use Encore\Admin\Config\Config;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 
 class IndexController extends Controller
 {
@@ -223,19 +224,15 @@ class IndexController extends Controller
      */
     public function config(Request $request){
 
-        $config = [
-            'area' => config('global_area'),
-            'lang' => config('global_lang'),
-            'money_sign' => config('money_sign'),
-            'email' => config('global_email'),
-            'phone' => config('global_phone'),
-        ];
+        $country_all = Country::all();
 
-        $global_configs = AdminConfig::pluck('value','name');
+        $country_list = collect([]);
 
-        $country_list = config('country.country_list');
+        $country_all->map(function($item) use ($country_list){
+            $country_list->put($item->id, $item->toArray());
+        });
 
-        return returned(true, '', compact('config','global_configs', 'country_list'));
+        return returned(true, '', compact('country_list'));
     }
 
 

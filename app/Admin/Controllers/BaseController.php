@@ -6,6 +6,7 @@ use App\Models\GoodCategory;
 use App\Models\GoodModule;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use \Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,9 +17,9 @@ class BaseController extends Controller
 
         View::share('erp_api_domain', env('ERP_API_DOMAIN', ''));
         View::share('shop_front_url', env('SHOP_FRONT_URL', ''));
-        View::share('global_area', config('global_area'));
-        View::share('global_lang', config('global_lang'));
-        View::share('money_sign', config('money_sign'));
+        // View::share('global_area', config('global_area'));
+        // View::share('global_lang', config('global_lang'));
+        // View::share('money_sign', config('money_sign'));
 
         $good_categories = GoodCategory::pluck('name','id');
         $good_modules = GoodModule::pluck('name','id');
@@ -29,7 +30,7 @@ class BaseController extends Controller
         //上传配置
         View::share('upload_config', config('upload'));
         //国家配置
-        View::share('country_list', config('country.country_list'));
+        View::share('country_list', Country::pluck('name','id'));
 
 
     }

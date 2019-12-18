@@ -89,7 +89,7 @@
                                 <tr>
                                     <td>{{$module->id}}</td>
                                     <td>
-                                        {{ collect(array_get($country_list, $module->country_id))->get('name') }}
+                                        {{ $module->country->name }}
                                     </td>
                                     <td>
                                         @foreach($module->good_module_images as $good_module_image)
@@ -219,7 +219,7 @@
                             @foreach($slides as $slide)
                                 <tr>
                                     <td>{{$slide->id}}</td>
-                                    <td>{{ collect(array_get($country_list, $slide->country_id))->get('name') }}</td>
+                                    <td>{{ $slide->country->name }}</td>
                                     <td style="width: 80px;">
                                         <div style="width: 70px;"
                                              title=""

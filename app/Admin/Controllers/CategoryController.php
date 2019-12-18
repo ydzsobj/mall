@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Country;
 use App\Models\GoodCategory;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
@@ -76,14 +77,13 @@ class CategoryController
     {
         $grid = new Grid(new GoodCategory());
 
-        $country_list = config('country.country_list');
-        $options = collect($country_list)->pluck('name', 'id');
+        $country_list = Country::pluck('name','id');
 
         $grid->id('ID');
         $grid->column('country_id','所属国家')->display(function ($country_id) use ($country_list) {
 
             $country = Arr::get($country_list, $country_id);
-            return $country['name'];
+            return $country;
 
         });
         $grid->name('类别名称');
@@ -98,9 +98,9 @@ class CategoryController
 
         $grid->model()->orderBy('country_id', 'desc');
 
-        $grid->filter(function ($filter) use ($options) {
+        $grid->filter(function ($filter) use ($country_list) {
             $filter->disableIdFilter();
-            $filter->equal('country_id','所属国家')->select($options);
+            $filter->equal('country_id','所属国家')->select($country_list);
         });
 
         return $grid;
@@ -113,11 +113,9 @@ class CategoryController
 //        $form->display('id', 'ID');
 //        $form->text('name','类别名称')->rules('required');
 
-        $country_list = config('country.country_list');
+        $country_list = Country::pluck('name','id');
 
-        $options = collect($country_list)->pluck('name', 'id');
-
-        $form->select('country_id', '所属国家')->rules('required')->options($options);
+        $form->select('country_id', '所属国家')->rules('required')->options($country_list);
 
         $form->text('name','类别名称')
             ->creationRules(['required', "unique:good_categories"])

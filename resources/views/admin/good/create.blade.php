@@ -61,7 +61,7 @@
                                         <select class="form-control single_select" style="width: 100%;" name="country_id" required="1" >
                                             <option></option>
                                             @foreach($country_list as $key=>$country)
-                                                <option value="{{$key}}">{{$country['name'] }}</option>
+                                                <option value="{{$key}}">{{$country }}</option>
                                             @endforeach
                                         </select>
                                     </div>

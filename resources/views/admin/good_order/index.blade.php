@@ -114,7 +114,7 @@
                                                     <select class="form-control status" name="country_id">
                                                         <option></option>
                                                         @foreach($country_list as $key=>$country)
-                                                            <option value="{{$key}}" @if($search['country_id'] == $key) selected @endif>{{$country['name']}}</option>
+                                                            <option value="{{$key}}" @if($search['country_id'] == $key) selected @endif>{{$country}}</option>
                                                         @endforeach
 
                                                     </select>
@@ -285,7 +285,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{ collect(array_get($country_list, $order->country_id))->get('money_sign') }}
+                                        {{ $order->country->money_sign }}
                                     </td>
                                     <td>
                                         <span style="color: @if($order->status == 1)green @elseif($order->status == 2) red @else orange @endif "

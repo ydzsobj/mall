@@ -20,7 +20,7 @@
                         <select class="form-control status" name="country_id" required="1">
                             <option></option>
                             @foreach($country_list as $key=>$country)
-                                <option value="{{$key}}" @if($detail->country_id == $key) selected @endif>{{$country['name']}}</option>
+                                <option value="{{$key}}" @if($detail->country_id == $key) selected @endif>{{$country}}</option>
                             @endforeach
                         </select>
 

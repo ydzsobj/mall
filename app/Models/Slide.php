@@ -22,4 +22,8 @@ class Slide extends Model
     public function good(){
         return $this->belongsTo(Good::class)->withDefault();
     }
+
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
 }

@@ -7,7 +7,7 @@
 
 <table class="table" style="margin-left: 150px;width: 80%;">
     <tr><td>订单编号</td><td>{{$detail->sn}}</td></tr>
-    <tr><td>订单总金额</td><td>{{ $money_sign . $detail->price}}</td></tr>
+    <tr><td>订单总金额</td><td>{{ $detail->country->money_sign }} {{ $detail->price}}</td></tr>
     <tr><td>支付方式</td><td>{{array_get($pay_types, $detail->pay_type_id, '')}}</td></tr>
     <tr><td>订单状态</td><td>{{array_get($status, $detail->status, '')}}</td></tr>
     <tr><td>下单时间</td><td>{{$detail->created_at}}</td></tr>

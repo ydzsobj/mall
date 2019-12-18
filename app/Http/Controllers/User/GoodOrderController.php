@@ -10,6 +10,7 @@ use App\Models\GoodOrderSku;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Jobs\sendSms;
+use App\Models\Country;
 use App\Models\ServicePhone;
 
 class GoodOrderController extends Controller
@@ -128,13 +129,16 @@ class GoodOrderController extends Controller
         $total_off = $request->post('total_off');
         $total_off = $total_off ? round($total_off/100, 2) : 0;
 
+        $country_id = $request->post('country_id');
+        $country = Country::find($country_id);
+
         $insert_data = [
             'price' => $skus_price->sum() - $total_off,
             'total_off' => $total_off,
             'ip' => $ip,
-            'sn' => generate_sn(),
+            'sn' => $country->order_prefix. generate_sn(),
             'coupon_code_id' => $request->post('coupon_code_id'),
-            'country_id' => $request->post('country_id'),
+            'country_id' => $country_id,
         ];
 
         $go = GoodOrder::create(array_merge($insert_data, $address, compact('province', 'city', 'area')));

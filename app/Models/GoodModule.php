@@ -28,11 +28,15 @@ class GoodModule extends Model
         return $this->hasMany(GoodModuleImage::class);
     }
 
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
+
     public function get_data(){
 
         return self::with(['goods' => function($query){
             $query->select('id','title','original_price','price','good_module_id','main_image_url')->orderBy('id', 'desc');
-        }])
+        },'country'])
             ->select('id','name')
             ->orderBy('good_modules.id','desc')
             ->get();
