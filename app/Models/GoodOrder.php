@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Encore\Admin\Facades\Admin;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use itbdw\Ip\IpLocation;
 
@@ -35,6 +36,7 @@ class GoodOrder extends Model
         'area',
         'postcode',
         'coupon_code_id',
+        'country_id'
 
     ];
 
@@ -277,7 +279,8 @@ class GoodOrder extends Model
             'good_orders.short_address',
              DB::raw('(price - total_off) as price'),
             'good_orders.status',
-            'good_orders.remark'
+            'good_orders.remark',
+            'good_orders.country_id'
 
         )
             ->orderBy('good_orders.id', 'desc')
@@ -286,10 +289,13 @@ class GoodOrder extends Model
         $pay_types = config('order.pay_types');
         $status = config('order.status');
 
+        $country_list = config('country.country_list');
+
         foreach ($orders as $order){
             $order->status_name = array_get($status, $order->status, '');
-            $order->currency_code = config('money_sign','');
-            $order->country_name = config('global_area','');
+            $country = Arr::get($country_list, $order->country_id);
+            $order->currency_code = $country['money_sign'];
+            $order->country_name = $country['name'];
         }
 
 //        dd($orders->toArray());
