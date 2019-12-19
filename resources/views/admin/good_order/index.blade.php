@@ -206,7 +206,7 @@
                                     总价
                                 </th>
                                 <th>
-                                    货币
+                                    国家
                                 </th>
 
                                 <th>
@@ -285,7 +285,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{ $order->country->money_sign }}
+                                        {{ $order->country->name }}
                                     </td>
                                     <td>
                                         <span style="color: @if($order->status == 1)green @elseif($order->status == 2) red @else orange @endif "
