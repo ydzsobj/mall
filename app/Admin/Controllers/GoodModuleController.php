@@ -17,10 +17,15 @@ class GoodModuleController extends BaseController
      */
     public function index(Request $request)
     {
-       $good_modules = GoodModule::orderBy('country_id', 'desc')->orderBy('sort','desc')->get();
-       $slides = Slide::orderBy('country_id', 'desc')->orderBy('sort','desc')->get();
+       $good_module = new GoodModule();
+       $good_modules = $good_module->get_data($request);
 
-       return view('admin.good_module.index', compact('good_modules','slides'));
+       $slide = new Slide();
+       $slides = $slide->get_data($request);
+
+       $search = $request->all();
+
+       return view('admin.good_module.index', compact('good_modules','slides','search'));
     }
 
     //新增页面

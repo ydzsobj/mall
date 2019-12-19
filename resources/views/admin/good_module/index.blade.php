@@ -35,6 +35,47 @@
 
                     <div class="box-header with-border " id="filter-box">
 
+                            <form action="{{route('good_modules.index')}}" class="form-horizontal" method="get" id="fm">
+
+                                    <div class="row">
+                                        <div>
+                                            <div class="box-body">
+                                                <div class="fields-group">
+                                                    <div class="form-group">
+
+                                                        <label class="col-sm-1 control-label">国家</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control status" name="country_id">
+                                                                <option></option>
+                                                                @foreach($country_list as $key=>$country)
+                                                                    <option value="{{$key}}" @if(isset($search['country_id']) && $search['country_id'] == $key) selected @endif>{{$country}}</option>
+                                                                @endforeach
+
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-md-4">
+                                                            <div class="btn-group pull-left">
+                                                                <button class="btn btn-info submit btn-sm">
+                                                                    <i class="fa fa-search"></i>&nbsp;&nbsp;搜索
+                                                                </button>
+                                                            </div>
+
+                                                            <div class="btn-group pull-left " style="margin-left: 10px;">
+                                                                    <a href="{{route('good_modules.index')}}" class="btn btn-default btn-sm"><i
+                                                                                class="fa fa-undo"></i>&nbsp;&nbsp;重置</a>
+                                                                </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
                         <div class="pull-right">
                             <div class="btn-group pull-right grid-create-btn" style="margin-right: 10px">
                                 <a href="{{route('good_modules.create')}}" class="btn btn-sm btn-success" title="新增">
@@ -166,6 +207,47 @@
         <div class="row"><div class="col-md-12"><div class="box">
 
                     <div class="box-header with-border " id="filter-box">
+
+                            <form action="{{route('good_modules.index')}}" class="form-horizontal" method="get" id="fm">
+
+                                <div class="row">
+                                    <div>
+                                        <div class="box-body">
+                                            <div class="fields-group">
+                                                <div class="form-group">
+
+                                                    <label class="col-sm-1 control-label">国家</label>
+                                                    <div class="col-sm-2">
+                                                        <select class="form-control status" name="country_id">
+                                                            <option></option>
+                                                            @foreach($country_list as $key=>$country)
+                                                                <option value="{{$key}}" @if(isset($search['country_id']) && $search['country_id'] == $key) selected @endif>{{$country}}</option>
+                                                            @endforeach
+
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="btn-group pull-left">
+                                                            <button class="btn btn-info submit btn-sm">
+                                                                <i class="fa fa-search"></i>&nbsp;&nbsp;搜索
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="btn-group pull-left " style="margin-left: 10px;">
+                                                            <a href="{{route('good_modules.index')}}" class="btn btn-default btn-sm"><i
+                                                                        class="fa fa-undo"></i>&nbsp;&nbsp;重置</a>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
 
                         <div class="pull-right">
                             <div class="btn-group pull-right grid-create-btn" style="margin-right: 10px">

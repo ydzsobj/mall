@@ -26,4 +26,14 @@ class Slide extends Model
     public function country(){
         return $this->belongsTo(Country::class);
     }
+
+    public function get_data($request){
+        $country_id = $request->get('country_id');
+        return self::when($country_id, function($query) use ($country_id){
+            $query->where('country_id', $country_id);
+        } )
+            ->orderBy('country_id', 'desc')
+            ->orderBy('sort','desc')
+            ->get();
+    }
 }
