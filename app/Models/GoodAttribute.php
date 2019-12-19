@@ -26,4 +26,6 @@ class GoodAttribute extends Model
 
         return $this->hasMany(GoodAttributeValue::class);
     }
+
+
 }

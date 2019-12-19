@@ -332,7 +332,7 @@
                                     <td style="width:20%; word-break:break-all; word-wrap:break-word; white-space:inherit">
                                         @foreach($order->order_skus as $order_sku)
                                             @php($sku = $order_sku->sku_info)
-                                            <span>{{$sku->good->name. '【' .$sku->sku_id. '】 ' .\App\Models\ProductAttributeValue::get_show_name($sku->good_id, [$sku->s1,$sku->s2,$sku->s3]). ' x'. $order_sku->sku_nums }}</span><br>
+                                            <span>{{$sku->good->name. '【' .$sku->sku_id. '】 ' .\App\Models\GoodAttributeValue::get_show_name($sku->good_id, [$sku->s1,$sku->s2,$sku->s3]). ' x'. $order_sku->sku_nums }}</span><br>
                                         @endforeach
                                     </td>
                                     <td style="width:6%; word-break:break-all; word-wrap:break-word; white-space:inherit">

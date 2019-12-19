@@ -22,4 +22,48 @@ class GoodAttributeValue extends Model
         'thumb_url',
     ];
 
+     /**
+     * @param null $attr_value_id
+     * @return string
+     */
+    static function get_show_name($good_id, $attr_value_ids=[]){
+
+        $good_attr_ids = GoodAttribute::where('good_id', $good_id)->pluck('id');
+
+        $show_name_str = '';
+
+        foreach ($attr_value_ids as $attr_value_id){
+            if($attr_value_id){
+                $first =  self::where('attr_value_id', $attr_value_id)
+                    ->whereIn('good_attribute_id', $good_attr_ids)
+                    ->first();
+                $show_name_str .= $first ? $first->show_name.'-' : '';
+            }
+        }
+
+        return rtrim($show_name_str, '-');
+    }
+
+        /**
+     * @param $good_id
+     * @param array $attr_value_ids
+     * @return string
+     */
+    static function get_english_name($good_id, $attr_value_ids=[]){
+
+        $good_attr_ids = GoodAttribute::where('good_id', $good_id)->pluck('id');
+
+        $english_name_str = '';
+
+        foreach ($attr_value_ids as $attr_value_id){
+            if($attr_value_id){
+                $first =  self::where('attr_value_id', $attr_value_id)
+                    ->whereIn('good_attribute_id', $good_attr_ids)
+                    ->first();
+                $english_name_str .= $first ? $first->english_name.'-' : '';
+            }
+        }
+
+        return rtrim($english_name_str, '-');
+    }
 }
