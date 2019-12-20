@@ -88,8 +88,12 @@ class CategoryController
         });
         $grid->name('类别名称');
         $grid->show_name('展示名称');
+        $grid->desc('描述');
 
         $grid->column('image_url','图标')->image(env('APP_URL').'/uploads/admin/', 100, 100);
+
+        // 显示多图
+        $grid->column('image_url_list', '多图展示')->image(env('APP_URL').'/uploads/admin/', 100, 100);
 
         $grid->sort('排序');
 
@@ -125,12 +129,18 @@ class CategoryController
             ->creationRules(['required'])
             ->updateRules(['required']);
 
+        $form->textarea('desc', '描述');
+
         $form->text('sort','排序（范围0-99）')->rules('required|regex:/^\d{1,2}$/|min:1', [
             'regex' => '范围0-99',
             'min'   => '不能少于1个字符',
         ]);
 
-        $form->image('image_url', '图标')->uniqueName()->rules('required');
+        $form->image('image_url', '图标')->uniqueName();
+
+        $form->multipleImage('image_url_list', '多图显示')->uniqueName()->removable();
+
+
 
 //        $form->display('created_at');
 //        $form->display('updated_at');

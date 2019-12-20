@@ -21,4 +21,12 @@ class Country extends Model
         'order_prefix',
         'sms_msg'
     ];
+
+    public function getLogoUrlAttribute($value){
+        return $value ? asset('/uploads/admin/'.$value) : '';
+    }
+
+    public function getVideoUrlAttribute($value){
+        return $value ? asset('/uploads/admin/'.$value) : '';
+    }
 }

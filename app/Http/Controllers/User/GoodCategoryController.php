@@ -41,7 +41,9 @@ class GoodCategoryController extends Controller
       */
     public function index(Request $request)
     {
-       $good_categories = GoodCategory::orderBy('sort', 'desc')->select('id as category_id','show_name as name')->get();
+       $good_category = new GoodCategory();
+
+       $good_categories = $good_category->get_data($request);
 
        return returned(true,'', $good_categories);
     }

@@ -88,7 +88,12 @@ class CountryController extends AdminController
         $form->text('global_keywords', __('关键词'));
         $form->text('global_description', __('站点描述'));
         $form->text('order_prefix', __('订单前缀'));
+
         // $form->text('sms_msg', __('Sms msg'));
+
+        $form->image('logo_url', __('站点logo'));
+        $form->file('video_url', __('站点视频'));
+        $form->text('foreign_link', __('站点外链'));
 
         return $form;
     }

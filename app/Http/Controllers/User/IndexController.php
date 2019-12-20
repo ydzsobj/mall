@@ -34,11 +34,17 @@ class IndexController extends Controller
      *    "msg": "",
      *    "data": {
      *        "category": [
-     *            {
-     *                "mallCategoryId": 1,
-     *                "mallCategoryName": "数码科技"，
-     *                "image_url": "http://192.168.1.132:8081/uploads/admin/images/47a2e200a6eb3b83e27695587e263856.jpeg"
-     *            },
+     *   {
+    *                "mallCategoryId": 18,
+    *                "mallCategoryName": "模块1",
+    *                "image_url": "",
+    *                "image_url_list": [
+    *                    "http://192.168.1.132:8083/uploads/admin/images/4c89b06e21cc4a7dde6f93576278d36e.png",
+    *                    "http://192.168.1.132:8083/uploads/admin/images/0255e27fc9d441501417d765fa84cfdf.png",
+    *                    "http://192.168.1.132:8083/uploads/admin/images/e8d1d194e0bde1fb24d7e30a105c98e1.png"
+    *                ],
+    *                "desc": "这是描述。。。。。。。。"
+    *         },
      *            {
      *                "mallCategoryId": 2,
      *                "mallCategoryName": "美妆"
@@ -131,7 +137,27 @@ class IndexController extends Controller
      *                ],
      *                "name": ""
      *            }
-     *        ]
+     *        ],
+     *
+     *   "country": {
+        *            "id": 1,
+        *            "name": "印尼",
+        *            "money_sign": "IDR",
+        *            "global_lang": "ind-BA",
+        *            "global_email": "t78933934@gmail.com",
+        *            "global_phone": "18811112222",
+        *            "global_address": "河南郑州金水区",
+        *            "global_title": "印尼测试标题",
+        *            "global_keywords": "鞋子，包",
+        *            "global_description": "这是一条描述",
+        *            "order_prefix": "CR",
+        *            "sms_msg": "暂时忽略",
+        *            "logo_url": "http://192.168.1.132:8083/uploads/admin/images/02.png",
+        *            "video_url": "http://192.168.1.132:8083/uploads/admin/files/demo.mp4",
+        *            "foreign_link": "http://baidu.com",
+        *            "created_at": "2019-12-18 16:16:12",
+        *            "updated_at": "2019-12-20 10:48:01"
+        *        }
      *    }
      *}
      *
@@ -141,11 +167,15 @@ class IndexController extends Controller
 
         $country_id = $request->get('country_id');
 
+        $country = Country::find($country_id);
+
         //分类
         $category = GoodCategory::select(
             'id as mallCategoryId',
             'show_name as mallCategoryName',
-            'image_url'
+            'image_url',
+            'image_url_list',
+            'desc'
         )
             ->where('country_id', $country_id)
             ->orderBy('sort', 'desc')
@@ -184,7 +214,7 @@ class IndexController extends Controller
 
         $hotGoods = $goods->all();
 
-        return returned(true, '', compact('category', 'slides','hotGoods','floorData'));
+        return returned(true, '', compact('category', 'slides','hotGoods','floorData', 'country'));
 
     }
 
