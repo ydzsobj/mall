@@ -94,6 +94,7 @@ class CountryController extends AdminController
         $form->image('logo_url', __('站点logo'));
         $form->file('video_url', __('站点视频'));
         $form->text('foreign_link', __('站点外链'));
+        $form->image('foreign_link_image_url', __('站点外链图片'));
 
         return $form;
     }

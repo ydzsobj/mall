@@ -79,7 +79,7 @@ class CategoryController
 
         $country_list = Country::pluck('name','id');
 
-        $grid->id('ID');
+        $grid->id('ID')->sortable();;
         $grid->column('country_id','所属国家')->display(function ($country_id) use ($country_list) {
 
             $country = Arr::get($country_list, $country_id);

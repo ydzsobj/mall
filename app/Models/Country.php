@@ -29,4 +29,8 @@ class Country extends Model
     public function getVideoUrlAttribute($value){
         return $value ? asset('/uploads/admin/'.$value) : '';
     }
+
+    public function getForeignLinkImageUrlAttribute($value){
+        return $value ? asset('/uploads/admin/'.$value) : '';
+    }
 }
