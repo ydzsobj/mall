@@ -142,7 +142,7 @@
 
                                             <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
 
-                                            <input type="text" id="price" name="price" value="" class="form-control price" placeholder="输入 单品原价" required="1" />
+                                            <input type="text" id="price" name="price" value="" class="form-control price" placeholder="输入 单品价格" required="1" />
 
                                         </div>
                                     </div>
@@ -221,6 +221,38 @@
 
                                         </div>
 
+                                    </div>
+                                </div>
+
+                                <div class="form-group  ">
+
+                                    <label for="whats_app_id" class="col-sm-2 control-label">WhatsAppID</label>
+
+                                    <div class="col-sm-8">
+
+                                        <div class="input-group">
+
+                                            <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
+
+                                            <textarea type="text" id="whats_app_id" name="whats_app_id" value="" class="form-control whats_app_id" placeholder="请输入"></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group  ">
+
+                                    <label for="messager_id" class="col-sm-2 control-label">MessagerID</label>
+
+                                    <div class="col-sm-8">
+
+                                        <div class="input-group">
+
+                                            <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
+
+                                            <textarea type="text" id="messager_id" name="messager_id" value="" class="form-control messager_id" placeholder="请输入"></textarea>
+
+                                        </div>
                                     </div>
                                 </div>
 
