@@ -39,6 +39,8 @@ class Good extends Model
         'main_image_url',
         'main_video_url',
         'fb_pix',
+        'whats_app_id',
+        'messager_id',
         'show_coupon_code',
         'country_id'
 

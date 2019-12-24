@@ -69,6 +69,8 @@ class GoodController extends BaseController
             'detail_desc',
             'size_desc',
             'fb_pix',
+            'whats_app_id',
+            'messager_id',
             'about',
             'show_coupon_code',
             'country_id'
@@ -132,6 +134,8 @@ class GoodController extends BaseController
             'detail_desc',
             'size_desc',
             'fb_pix',
+            'whats_app_id',
+            'messager_id',
             'about',
             'show_coupon_code',
         ]);
