@@ -257,6 +257,17 @@
 
             <div class="form-group  ">
 
+                <label for="sold_out" class="col-sm-2  control-label">是否下架</label>
+
+                <div class="col-sm-8">
+
+                    <input type="checkbox" name="sold_out" value="{{$detail->sold_out}}" @if($detail->sold_out)checked @endif />
+
+                </div>
+            </div>
+
+            <div class="form-group  ">
+
                 <label for="detail_desc" class="col-sm-2 asterisk control-label">商品描述</label>
 
                 <div class="col-sm-8">
@@ -446,9 +457,9 @@
                 $.admin.toastr.success('刷新成功 !', '', {positionClass: "toast-top-center"});
             });
 
-            $("input[name='show_comment'],input[name='show_coupon_code']").bootstrapSwitch({
-                onText : '开',
-                offText : '关',
+            $("input[name='show_comment'],input[name='show_coupon_code'],input[name='sold_out']").bootstrapSwitch({
+                onText : '是',
+                offText : '否',
                 onSwitchChange: function (event, state) {
                     console.log(state);
                     if (state == true) {

@@ -138,6 +138,7 @@ class GoodController extends BaseController
             'messager_id',
             'about',
             'show_coupon_code',
+            'sold_out'
         ]);
 
         $list_image_clear_flag = $request->post('list_image_clear_flag');
@@ -149,6 +150,10 @@ class GoodController extends BaseController
 
         if(!$request->post('show_coupon_code')){
             $update_data['show_coupon_code'] = 0;
+        }
+
+        if(!$request->post('sold_out')){
+            $update_data['sold_out'] = 0;
         }
 
         $pay_types = json_encode($request->post('pay_types'));

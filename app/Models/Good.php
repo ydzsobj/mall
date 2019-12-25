@@ -42,7 +42,8 @@ class Good extends Model
         'whats_app_id',
         'messager_id',
         'show_coupon_code',
-        'country_id'
+        'country_id',
+        'sold_out'
 
     ];
 
@@ -263,6 +264,9 @@ class Good extends Model
             ->when($country_id, function($query) use ($country_id){
                 $query->where('country_id', $country_id);
             })
+
+            //排除下架的
+            ->where('sold_out', 0)
 
             ->select(
                 'id as goodsId',

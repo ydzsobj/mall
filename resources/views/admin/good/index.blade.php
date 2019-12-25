@@ -193,7 +193,9 @@
                                 <th>
                                     单品类别
                                 </th>
-
+                                <th>
+                                    状态
+                                </th>
                                 <th>
                                     发布时间
                                 </th>
@@ -234,7 +236,13 @@
                                     <td>{{$good->price}}</td>
                                     <td> {{ $good->country->money_sign}}</td>
                                     <td>{{$good->category->name}}</td>
-
+                                    <td>
+                                        @if($good->sold_out)
+                                            <span style="color:red;">已下架</span>
+                                            @else
+                                            <span style="color:green;">正常</span>
+                                            @endif
+                                    </td>
                                     <td>{{$good->created_at}}</td>
 
                                     <td>{{$good->admin_user->username}}</td>
