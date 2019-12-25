@@ -178,6 +178,7 @@ class IndexController extends Controller
             'desc'
         )
             ->where('country_id', $country_id)
+            ->where('is_enabled', '>', 0)
             ->orderBy('sort', 'desc')
             ->get();
 

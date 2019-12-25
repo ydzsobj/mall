@@ -88,14 +88,18 @@ class CategoryController
         });
         $grid->name('类别名称');
         $grid->show_name('展示名称');
-        $grid->desc('描述');
+        $grid->desc('描述')->width(200);
 
         $grid->column('image_url','图标')->image(env('APP_URL').'/uploads/admin/', 100, 100);
 
         // 显示多图
         $grid->column('image_url_list', '多图展示')->image(env('APP_URL').'/uploads/admin/', 100, 100);
 
-        $grid->sort('排序');
+        $grid->sort('排序')->sortable();
+
+        $states = ['on' , 'off'];
+
+        $grid->column('is_enabled','状态')->switch($states);
 
         $grid->created_at('创建时间');
 //        $grid->updated_at();
@@ -140,6 +144,7 @@ class CategoryController
 
         $form->multipleImage('image_url_list', '多图显示')->uniqueName()->removable();
 
+        $form->switch('is_enabled', '启用/禁用');
 
 
 //        $form->display('created_at');

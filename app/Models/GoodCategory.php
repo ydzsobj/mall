@@ -51,6 +51,7 @@ class GoodCategory extends Model
         return self::when($country_id, function($query) use ($country_id){
             $query->where('country_id', $country_id);
         })
+            ->where('is_enabled', '>', 0)
             ->orderBy('sort', 'desc')
             ->select('id as category_id','show_name as name')
             ->get();
