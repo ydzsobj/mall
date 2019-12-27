@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\Good;
+use App\Models\GoodAttribute;
+use App\Models\GoodAttributeValue;
 use App\Models\GoodSku;
 use App\Models\Product;
 use App\Models\ProductAttribute;
@@ -89,6 +91,43 @@ class ProductController extends BaseController
                 ]);
             }
         }
+
+        //填充属性
+        $this->create_good_attribute($product, $product_attr);
+    }
+
+    //填充商品对应属性
+    public function create_good_attribute($product, $product_attr){
+
+        $good_ids = Good::where('product_id', $product->id)->pluck('id');
+
+        foreach($good_ids as $good_id){
+
+            foreach($product_attr as  $attr_id=>$attr_values){
+
+                $attr = Attribute::find($attr_id);
+
+                $good_attribute_mod = GoodAttribute::firstOrCreate([
+                    'good_id' => $good_id,
+                    'attr_id' => $attr_id,
+                ],[
+                    'attr_name' => $attr->name,
+                    'show_name' => $attr->name,
+                ]);
+
+                foreach($attr_values as $attr_value_id=>$attr_value){
+                    $attr_value = AttributeValue::find($attr_value_id);
+                    GoodAttributeValue::firstOrCreate([
+                        'good_attribute_id' => $good_attribute_mod->id,
+                        'attr_value_id' => $attr_value_id,
+                    ],[
+                        'attr_value_name' => $attr_value->name,
+                        'show_name' => $attr_value->name,
+                    ]);
+                }
+            }
+        }
+
     }
 
     public function create_product_sku($product, $request){
@@ -140,7 +179,7 @@ class ProductController extends BaseController
 
             foreach($good_ids as $good_id){
 
-                GoodSku::firstOrCreate([
+                GoodSku::updateOrCreate([
                         'good_id' => $good_id,
                         'sku_id' => $sku['sku_code']
                     ],$good_sku_data->all()
