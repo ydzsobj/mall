@@ -20,7 +20,13 @@ class GoodCategory extends Model
     public function setImageUrlListAttribute($pictures)
     {
         if (is_array($pictures)) {
-            $this->attributes['image_url_list'] = json_encode($pictures);
+
+            $image_urls = [];
+            foreach($pictures as $picture){
+                $relative_path = str_replace(env('APP_URL').'/uploads/admin/','', $picture);
+                array_push($image_urls, $relative_path);
+            }
+            $this->attributes['image_url_list'] = json_encode($image_urls);
         }
     }
 
@@ -35,7 +41,7 @@ class GoodCategory extends Model
             if(count($urls) > 0){
 
                 foreach($urls as $url){
-                    array_push($image_urls, asset('/uploads/admin/'.$url));
+                    array_push($image_urls,  asset('/uploads/admin/'.$url));
                 }
 
                 return $image_urls;
