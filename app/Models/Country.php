@@ -33,4 +33,8 @@ class Country extends Model
     public function getForeignLinkImageUrlAttribute($value){
         return $value ? asset('/uploads/admin/'.$value) : '';
     }
+
+    public function getShippingImageUrlAttribute($value){
+        return $value ? asset('/uploads/admin/'.$value) : '';
+    }
 }
